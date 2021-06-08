@@ -44,6 +44,8 @@ class SistemaDinamico(object):
     #dejamos hacer
     coex_comp.puntos_fijos()
     coex_comp.estabilidad()
+    #activo impresion latex
+    sy.init_printing()
     coex_comp.print_pfijos()
     coex_comp.print_avals()
     '''
