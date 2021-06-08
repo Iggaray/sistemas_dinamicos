@@ -54,3 +54,16 @@ class SistemaDinamico(object):
         for p in self.p_fijos:
             print(sy.latex(p.simplify()))
             print("\n")
+    
+    def streamplot(self, x_range, y_range):
+        '''Solo sistemas 2D
+        x, y: 1D numpy arrays con el rango de interes en cada variable
+        Internamente se hace un meshgrid'''
+        if len(self.f)!=2 or len(self.x)!=2:
+            print("No es sistema 2D o hay parametros no definidos")
+            return 0
+        
+        fx = sy.lambdify(self.x, self.f[0])
+        fy = sy.lambdify(self.x, self.f[1])
+        xx, yy = np.meshgrid(x_range, y_range)
+        plt.streamplot(xx, yy, fx(xx, yy), fy(xx, yy))
