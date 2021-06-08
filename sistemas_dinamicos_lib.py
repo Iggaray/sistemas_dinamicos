@@ -13,7 +13,41 @@ class SistemaDinamico(object):
     '''
     x es una lista de simbolos sympy
     f es una lista de expresiones sympy con las derivadas de cada variable
+    
+    Ejemplo de uso:
+    ---------------
+    # Defino simbolos de variables dinamicas
+    x = sy.symbols('x')
+    y = sy.symbols('y')
+    z = sy.symbols('z')
+    
+    #defino simbolos de parametros
+    h = sy.symbols('h')
+    ca = sy.symbols('c_a')
+    ea = sy.symbols('e_a')
+    eb = sy.symbols('e_b')
+    cb = sy.symbols('c_b')
+
+    #defino las expresiones dinamicas
+    fx = -ca*x*y+ea*y-cb*x*z+eb*z
+    fy = ca*x*y-ea*y+ca*z*y
+    fz = cb*x*z-eb*z-ca*z*y
+    
+    #por el tipo de problema, puedo sustituir x con h-y-z
+    fx = fx.replace(x, h-y-z)
+    fy = fy.replace(x, h-y-z)
+    fz = fz.replace(x, h-y-z)
+
+    #declaro el sistema de coexistencia competitiva
+    coex_comp = SistemaDinamico([y,z],[fy,fz])
+    
+    #dejamos hacer
+    coex_comp.puntos_fijos()
+    coex_comp.estabilidad()
+    coex_comp.print_pfijos()
+    coex_comp.print_avals()
     '''
+    
     def __init__(self, x, f):
         self.x = x
         self.f = f
