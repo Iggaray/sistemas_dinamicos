@@ -46,6 +46,10 @@ class SistemaDinamico(object):
     coex_comp.estabilidad()
     #activo impresion latex
     sy.init_printing()
+    #observo puntos fijos y autovalores en consola
+    coex_comp.p_fijos
+    coex_comp.avals
+    #imprimo las expresiones en latex pa copypastear
     coex_comp.print_pfijos()
     coex_comp.print_avals()
     '''
